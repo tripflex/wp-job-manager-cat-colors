@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: WP Job Manager - Job Category Colors 
- * Plugin URI:  https://github.com/tripflex/wp-job-manager-colors
+ * Plugin Name: WP Job Manager - Job Category Colors
+ * Plugin URI:  https://github.com/tripflex/wp-job-manager-cat-colors
  * Description: Assign custom colors for each existing job category.
  * Author:      Myles McNamara
  * Author URI:  http://smyl.es
@@ -63,21 +63,30 @@ class WP_Job_Manager_Cat_Colors {
 				'text'       => __( 'Text', 'job_manager_cat_colors' )
 			)
 		);
-
 		foreach ( $terms as $term ) {
 			$options[] = array(
 				'name' 		  => 'job_manager_job_cat_' . $term->slug . '_color',
 				'std' 		  => '',
 				'placeholder' => '#',
 				'label' 	  => '<strong>' . $term->name . '</strong>',
-				'desc'		  => __( 'Hex value for the color of this job type.', 'job_manager_cat_colors' ),
+				'desc'		  => __( 'Hex value for the color of this job category.', 'job_manager_cat_colors' ),
 				'attributes'  => array(
 					'data-default-color' => '#fff',
 					'data-type'          => 'colorpicker'
 				)
 			);
 		}
-
+		$options[] = array(
+			'name' 		  => 'job_manager_job_cat_usage_color',
+			'label' 	  => __( 'Usage', 'job_manager_cat_colors' ),
+			'desc'        => __( 'You will need to place this code somewhere in your template file to display the category with the styling:', 'job_manager_cat_colors' ). '<br/>' .
+							'<code>&lt;li class=&quot;job-category &lt;?php echo get_the_job_category() ? sanitize_title( get_the_job_category()-&gt;slug ) : &#039;&#039;; ?&gt;&quot;&gt;&lt;?php the_job_category(); ?&gt;&lt;/li&gt;</code>' . '<br/>' . '<br/>' .
+							'<code>content-single-job.php</code>' . __('Would be the file for Jobify theme.', 'job_manager_cat_colors') . '<br/>',
+			'type'        => 'input',
+			'attributes'  => array(
+				'style' => 'display: none;'
+				)
+		);
 		return $options;
 	}
 
@@ -86,7 +95,7 @@ class WP_Job_Manager_Cat_Colors {
 
 		echo "<style id='job_manager_cat_colors'>\n";
 
-		echo ".job-category {font: bold 12px/normal 'Montserrat', sans-serif;text-transform: uppercase;color: #fff;padding: 3px 10px;border-radius: 4px;}.page-subtitle li.job-category{text-align:center;padding: 3px 10px;border-right: 0;}";
+		echo ".job-category {font: bold 12px/normal 'Montserrat', sans-serif;text-transform: uppercase;color: #fff;padding: 3px 10px;border-radius: 4px;}li.job-category{text-align:center;padding: 3px 10px;border-right: 0;}";
 
 		foreach ( $terms as $term ) {
 			$what = 'background' == get_option( 'job_manager_job_cat_what_color' ) ? 'background-color' : 'color';
@@ -99,7 +108,7 @@ class WP_Job_Manager_Cat_Colors {
 
 	public function colorpickers( $hook ) {
 		$screen = get_current_screen();
-		
+
 		if ( 'job_listing_page_job-manager-settings' != $screen->id )
 			return;
 
@@ -109,7 +118,7 @@ class WP_Job_Manager_Cat_Colors {
 
 	public function colorpickersjs() {
 		$screen = get_current_screen();
-		
+
 		if ( 'job_listing_page_job-manager-settings' != $screen->id )
 			return;
 		?>
@@ -145,13 +154,13 @@ function get_the_job_category( $post = null ) {
 	if ( $post->post_type !== 'job_listing' )
 		return;
 
-	$types = wp_get_post_terms( $post->ID, 'job_listing_category' );
+	$categories = wp_get_post_terms( $post->ID, 'job_listing_category' );
 
-	if ( $types )
-		$type = current( $types );
+	if ( $categories )
+		$category = current( $categories );
 	else
-		$type = false;
+		$category = false;
 
-	return apply_filters( 'the_job_category', $type, $post );
+	return apply_filters( 'the_job_category', $category, $post );
 }
 add_action( 'init', array( 'WP_Job_Manager_Cat_Colors', 'instance' ) );
