@@ -27,8 +27,9 @@ Select the color of each existing job category in the Job Listings' settings. Ca
 
 ## Template Code ##
 Insert the code below in your template to output the job category with the included styling.  The job-category class is used to set the
-`<li class="job-category <?php echo get_the_job_category() ? sanitize_title( get_the_job_category()->slug ) : ''; ?>"><?php the_job_category(); ?></li>`
-
+```php
+<li class="job-category <?php echo get_the_job_category() ? sanitize_title( get_the_job_category()->slug ) : ''; ?>"><?php the_job_category(); ?></li>
+```
 ### Features ###
 * Set color as background
 * Set color as text
