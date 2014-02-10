@@ -7,6 +7,8 @@
  * Author URI:  http://smyl.es
  * Version:     1.0
  * Text Domain: job_manager_cat_colors
+ * @Last Modified by:   myles
+ * @Last Modified time: 2014-02-10 16:45:19
  */
 
 // Exit if accessed directly
