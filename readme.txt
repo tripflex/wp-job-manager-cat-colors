@@ -5,7 +5,7 @@ Plugin URI: http://github.com/tripflex/wp-job-manager-cat-colors
 Contributors: SpencerFinnell, Myles McNamara
 Tags: job, job listing, job region, job categories, job category, job color
 Requires at least: 3.5
-Tested up to: 3.8
+Tested up to: 3.9
 Stable Tag: 1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
