@@ -14,7 +14,7 @@ Plugin | Details
 **Contributors:** | SpencerFinnell, Myles McNamara<br>
 **Tags:** | `job` `job listing` `job region` `job categories` `job category` `job color`<br>
 **Requires at least:** | 3.5<br>
-**Tested up to:** | 3.8<br>
+**Tested up to:** | 3.9<br>
 **Stable Tag:** | 1.0<br>
 **License:** | GPLv3<br>
 **License URI:** | http://www.gnu.org/licenses/gpl-3.0.html<br>
